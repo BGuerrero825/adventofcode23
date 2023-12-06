@@ -2,31 +2,35 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main(){
-	// take_input();
-	parse_file();	
-}
+#define INPUT_FILEPATH "C:\\Users\\brian\\Dev\\adventofcode23\\day2\\input.txt"
+const size_t LINE_SIZE = 1000;
 
-void parse_file(){
-	FILE *fp;
-	char buff[255];
-	int i = 0;
-	fp = fopen("input_cubes.txt", "r");
-	while(fscanf(fp, "%s", buff) != EOF){
-		printf("%s", buff);
-		i++;
+int main(){
+	// open a file
+	FILE * fp;
+	fp = fopen(INPUT_FILEPATH, "r");
+	// give an error if file doesn't exist
+	if(!fp){
+		perror(INPUT_FILEPATH);
+	}
+	// get each line of the file while null not returned (EOF)
+	char line[LINE_SIZE];
+	while(fgets(line, LINE_SIZE, fp) != NULL){
+		printf("%s -------- ", line);
+		check_game(line);
+		printf("\n");
 	}
 	fclose(fp);
-	printf("\niterations: %d\n", i);
-	printf("buff contents: %s\n", buff);
 }
 
-void take_input(){
-	char * input = malloc(sizeof(char)*20);
-	printf("Type something: ");
-	scanf("%s", input);
-	char * output = malloc(sizeof(char)*30); 
-	strcat(strcat(output, "You said, "), input);
-	printf("%s", output);
-	free(input);
+int check_game(char * line){
+	int green_count, blue_count, red_count = 0;
+	char * token = strtok(line, " ");
+	char * prev_token;
+	int game_num = 0;
+	while(token != NULL){
+		printf("%s\n", token);
+		prev_token = token; 	
+		token = strtok(NULL, " ");
+	}
 }
